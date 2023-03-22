@@ -3,6 +3,8 @@ package org.testdouble;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputFile {
   private static final Digit Zero = new Digit('_', '|', ' ', '|', '|', '_', '|');
@@ -36,24 +38,27 @@ public class InputFile {
 
   public InputFile(List<String> lines) {
     final String firstLine = lines.get(0);
-    final char top = getCharAt(firstLine, 1);
-
     final String secondLine = lines.get(1);
-    final char leftTop = getCharAt(secondLine, 0);
-    final char middle = getCharAt(secondLine, 1);
-    final char rightTop = getCharAt(secondLine, 2);
-
     final String thirdLine = lines.get(2);
-    final char leftBottom = getCharAt(thirdLine, 0);
-    final char bottom = getCharAt(thirdLine, 1);
-    final char rightBottom = getCharAt(thirdLine, 2);
 
-    final Digit digit = new Digit(top, leftTop, middle, rightTop, leftBottom, bottom, rightBottom);
-    digitRepresentation = digitStringHashMap.getOrDefault(digit, "?");
+    digitRepresentation = IntStream.range(0, 2)
+            .mapToObj(i -> {
+              final char top = getCharAt(firstLine, 1, i);
+              final char leftTop = getCharAt(secondLine, 0, i);
+              final char middle = getCharAt(secondLine, 1, i);
+              final char rightTop = getCharAt(secondLine, 2, i);
+              final char leftBottom = getCharAt(thirdLine, 0, i);
+              final char bottom = getCharAt(thirdLine, 1, i);
+              final char rightBottom = getCharAt(thirdLine, 2, i);
+              final Digit digit = new Digit(top, leftTop, middle, rightTop, leftBottom, bottom, rightBottom);
+              return digitStringHashMap.getOrDefault(digit, "?");
+            })
+            .collect(Collectors.joining());
   }
 
-  private char getCharAt(String firstLine, int index) {
-    return firstLine.length() > index ? firstLine.charAt(index) : ' ';
+  private char getCharAt(String firstLine, int index, int character) {
+    final int i = character * 3 + index;
+    return firstLine.length() > i ? firstLine.charAt(i) : ' ';
   }
 
   public List<AccountNumber> parse() {
