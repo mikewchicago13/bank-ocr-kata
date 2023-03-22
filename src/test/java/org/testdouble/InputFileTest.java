@@ -44,6 +44,12 @@ public class InputFileTest {
              _|
             
             """, "3"),
+    Four("""
+             
+            |_|
+              |
+            
+            """, "4"),
     ;
 
     private final String input;
