@@ -1,14 +1,15 @@
 package org.testdouble;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OutputFileTest {
   @Test
-  @Disabled
-  public void parse() {
-    fail();
+  public void toStringIsSimpleLineConcatenation() {
+    final String actual = new OutputFile(Arrays.asList(new AccountNumber("1"), new AccountNumber("2"))).toString();
+    assertEquals("1" + System.lineSeparator() + "2" + System.lineSeparator(), actual);
   }
 }
