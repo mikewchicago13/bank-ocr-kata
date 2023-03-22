@@ -25,6 +25,12 @@ public class InputFileTest {
             |_|
             
             """, "0"),
+    DoubleZero("""
+             _  _
+            | || |
+            |_||_|
+            
+            """, "00"),
     One("""
                 
               |
