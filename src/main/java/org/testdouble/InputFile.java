@@ -8,6 +8,7 @@ import java.util.Objects;
 public class InputFile {
   private static final Digit Zero = new Digit('_', '|', ' ', '|', '|', '_', '|');
   private static final Digit One = new Digit(' ', ' ', ' ', '|', ' ', ' ', '|');
+  private static final Digit Two = new Digit('_', ' ', '_', '|', '|', '_', ' ');
 
   private static final HashMap<Digit, String> digitStringHashMap;
 
@@ -15,26 +16,31 @@ public class InputFile {
     digitStringHashMap = new HashMap<>();
     digitStringHashMap.put(Zero, "0");
     digitStringHashMap.put(One, "1");
+    digitStringHashMap.put(Two, "2");
   }
 
   private final String digitRepresentation;
 
   public InputFile(List<String> lines) {
     final String firstLine = lines.get(0);
-    final char top = firstLine.length() > 1 ? firstLine.charAt(1) : ' ';
+    final char top = getCharAt(firstLine, 1);
 
     final String secondLine = lines.get(1);
-    final char leftTop = secondLine.charAt(0);
-    final char middle = secondLine.charAt(1);
-    final char rightTop = secondLine.charAt(2);
+    final char leftTop = getCharAt(secondLine, 0);
+    final char middle = getCharAt(secondLine, 1);
+    final char rightTop = getCharAt(secondLine, 2);
 
     final String thirdLine = lines.get(2);
-    final char leftBottom = thirdLine.charAt(0);
-    final char bottom = thirdLine.charAt(1);
-    final char rightBottom = thirdLine.charAt(2);
+    final char leftBottom = getCharAt(thirdLine, 0);
+    final char bottom = getCharAt(thirdLine, 1);
+    final char rightBottom = getCharAt(thirdLine, 2);
 
     final Digit digit = new Digit(top, leftTop, middle, rightTop, leftBottom, bottom, rightBottom);
-    digitRepresentation = digitStringHashMap.get(digit);
+    digitRepresentation = digitStringHashMap.getOrDefault(digit, "?");
+  }
+
+  private char getCharAt(String firstLine, int index) {
+    return firstLine.length() > index ? firstLine.charAt(index) : ' ';
   }
 
   public List<AccountNumber> parse() {

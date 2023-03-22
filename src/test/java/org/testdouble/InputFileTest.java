@@ -30,8 +30,14 @@ public class InputFileTest {
                 
               |
               |
-            
+              
             """, "1"),
+    Two("""
+             _
+             _|
+            |_
+            
+            """, "2"),
     ;
 
     private final String input;
