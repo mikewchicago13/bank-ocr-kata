@@ -27,7 +27,7 @@ public class InputFileTest {
             
             """, "0"),
     One("""
-            
+                
               |
               |
             
