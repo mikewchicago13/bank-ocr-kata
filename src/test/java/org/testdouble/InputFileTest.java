@@ -128,6 +128,24 @@ public class InputFileTest {
             |_||_||_||_||_||_||_||_||_|
             
             """, "?00000000"),
+    IllegibleMissing_TopRightPipeOn1("""
+            
+                 |  |  |  |  |  |  |  |
+              |  |  |  |  |  |  |  |  |
+                        
+            """, "?11111111"),
+    IllegibleMissing_BottomRightPipeOn1("""
+            
+              |  |  |  |  |  |  |  |  |
+                 |  |  |  |  |  |  |  |
+                        
+            """, "?11111111"),
+    IllegibleMissing_EverythingOnFirstDigit("""
+            
+                 |  |  |  |  |  |  |  |
+                 |  |  |  |  |  |  |  |
+                        
+            """, "?11111111"),
     MultipleLines("""
                 _  _     _  _  _  _  _\s
               | _| _||_||_ |_   ||_||_|
