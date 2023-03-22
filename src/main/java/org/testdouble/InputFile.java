@@ -5,10 +5,9 @@ import java.util.List;
 
 public class InputFile {
   public InputFile(List<String> lines) {
-
   }
 
   public List<AccountNumber> parse() {
-    return Collections.emptyList();
+    return Collections.singletonList(new AccountNumber());
   }
 }
