@@ -15,7 +15,7 @@ public class InputFileTest {
   @EnumSource(Samples.class)
   public void parse(Samples digits) {
     final List<AccountNumber> accountNumbers = new InputFile(Arrays.stream(digits.getInput().split(System.lineSeparator())).toList()).parse();
-    assertLinesMatch(Collections.singletonList(digits.getExpected()), accountNumbers.stream().map(Object::toString).collect(Collectors.toList()));
+    assertLinesMatch(digits.getExpected(), accountNumbers.stream().map(Object::toString).collect(Collectors.toList()));
   }
 
   private enum Samples {
@@ -85,19 +85,28 @@ public class InputFileTest {
               ||_  _|  | _||_|  ||_| _|
                         
             """, "123456789"),
+    MultipleLines("""
+                _  _     _  _  _  _  _\s
+              | _| _||_||_ |_   ||_||_|
+              ||_  _|  | _||_|  ||_| _|
+                        
+             _  _  _  _  _  _  _  _  _\s
+            |_||_||_||_||_||_||_||_||_|
+             _| _| _| _| _| _| _| _| _|
+                        
+            """, Arrays.asList("123456789", "999999999")),
     ;
 
     private final String input;
-    private final String expected;
+    private final List<String> expected;
 
     Samples(String input, String expected) {
+      this(input, Collections.singletonList(expected));
+    }
+    Samples(String input, List<String> expected) {
 
       this.input = input;
       this.expected = expected;
-    }
-
-    public String getExpected() {
-      return expected;
     }
 
     @Override
@@ -107,6 +116,10 @@ public class InputFileTest {
 
     public String getInput() {
       return input;
+    }
+
+    public List<String> getExpected() {
+      return expected;
     }
   }
 
