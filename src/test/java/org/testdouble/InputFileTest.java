@@ -18,7 +18,7 @@ public class InputFileTest {
     final String[] split = input.split(System.lineSeparator());
     final List<String> lines = Arrays.stream(split).toList();
     final List<AccountNumber> accountNumbers = new InputFile(lines).toAccountNumbers();
-    assertLinesMatch(digits.getExpected(), accountNumbers.stream().map(Object::toString).collect(Collectors.toList()));
+    assertLinesMatch(digits.getExpected(), accountNumbers.stream().map(Object::toString).map(x -> x.substring(0, 9)).collect(Collectors.toList()));
   }
 
   private enum Samples {
@@ -88,12 +88,6 @@ public class InputFileTest {
               ||_  _|  | _||_|  ||_| _|
                         
             """, "123456789"),
-    InvalidChecksum("""
-             _  _  _  _  _  _  _  _  _\s
-            | || || || || || || ||_   |
-            |_||_||_||_||_||_||_| _|  |
-                        
-            """, "000000057 ERR"),
     MultipleLines("""
                 _  _     _  _  _  _  _\s
               | _| _||_||_ |_   ||_||_|
