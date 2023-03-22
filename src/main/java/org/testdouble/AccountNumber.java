@@ -18,9 +18,7 @@ public class AccountNumber {
   public String toString() {
     final int length = toString.length();
     final boolean isIllegible = IntStream.range(0, length)
-            .mapToObj(x -> Constants.ILLEGIBLE_CHARACTER == toString.charAt(x))
-            .reduce((a, b) -> a || b)
-            .orElse(false);
+            .anyMatch(x -> Constants.ILLEGIBLE_CHARACTER == toString.charAt(x));
     if (isIllegible) {
       return toString + " ILL";
     }
