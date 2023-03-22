@@ -74,6 +74,12 @@ public class InputFileTest {
             |_|
             
             """, "8"),
+    Nine("""
+             _
+            |_|
+             _|
+            
+            """, "9"),
     ;
 
     private final String input;
