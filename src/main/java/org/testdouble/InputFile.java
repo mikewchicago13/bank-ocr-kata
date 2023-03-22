@@ -1,6 +1,5 @@
 package org.testdouble;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,28 +33,36 @@ public class InputFile {
     digitStringHashMap.put(Nine, "9");
   }
 
-  private final String digitRepresentation;
+  private final List<AccountNumber> accountNumbers;
 
   public InputFile(List<String> lines) {
-    final String firstLine = lines.get(0);
-    final String secondLine = lines.get(1);
-    final String thirdLine = lines.get(2);
+    final int size = lines.size() + 1;
+    final int numberOfAccountNumbers = size / 4;
+    accountNumbers = IntStream.range(0, numberOfAccountNumbers)
+            .mapToObj(index -> {
+              final int i = index * 4;
+              final String firstLine = lines.get(i);
+              final String secondLine = lines.get(i + 1);
+              final String thirdLine = lines.get(i + 2);
+              return IntStream.range(0, 9)
+                      .mapToObj(digit -> {
+                        final char top = getCharAt(firstLine, 1, digit);
 
-    digitRepresentation = IntStream.range(0, 9)
-            .mapToObj(digit -> {
-              final char top = getCharAt(firstLine, 1, digit);
+                        final char leftTop = getCharAt(secondLine, 0, digit);
+                        final char middle = getCharAt(secondLine, 1, digit);
+                        final char rightTop = getCharAt(secondLine, 2, digit);
 
-              final char leftTop = getCharAt(secondLine, 0, digit);
-              final char middle = getCharAt(secondLine, 1, digit);
-              final char rightTop = getCharAt(secondLine, 2, digit);
+                        final char leftBottom = getCharAt(thirdLine, 0, digit);
+                        final char bottom = getCharAt(thirdLine, 1, digit);
+                        final char rightBottom = getCharAt(thirdLine, 2, digit);
 
-              final char leftBottom = getCharAt(thirdLine, 0, digit);
-              final char bottom = getCharAt(thirdLine, 1, digit);
-              final char rightBottom = getCharAt(thirdLine, 2, digit);
-
-              return digitStringHashMap.getOrDefault(new Digit(top, leftTop, middle, rightTop, leftBottom, bottom, rightBottom), "?");
+                        return digitStringHashMap.getOrDefault(new Digit(top, leftTop, middle, rightTop, leftBottom, bottom, rightBottom), "?");
+                      })
+                      .collect(Collectors.joining());
             })
-            .collect(Collectors.joining());
+            .map(AccountNumber::new)
+            .collect(Collectors.toList());
+
   }
 
   private char getCharAt(String firstLine, int index, int character) {
@@ -63,8 +70,8 @@ public class InputFile {
     return firstLine.length() > i ? firstLine.charAt(i) : ' ';
   }
 
-  public List<AccountNumber> parse() {
-    return Collections.singletonList(new AccountNumber(digitRepresentation));
+  public List<AccountNumber> toAccountNumbers() {
+    return accountNumbers;
   }
 
   private record Digit(char top, char leftTop, char middle, char rightTop, char leftBottom, char bottom,

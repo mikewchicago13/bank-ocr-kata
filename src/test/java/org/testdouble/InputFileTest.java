@@ -14,7 +14,10 @@ public class InputFileTest {
   @ParameterizedTest
   @EnumSource(Samples.class)
   public void parse(Samples digits) {
-    final List<AccountNumber> accountNumbers = new InputFile(Arrays.stream(digits.getInput().split(System.lineSeparator())).toList()).parse();
+    final String input = digits.getInput();
+    final String[] split = input.split(System.lineSeparator());
+    final List<String> lines = Arrays.stream(split).toList();
+    final List<AccountNumber> accountNumbers = new InputFile(lines).toAccountNumbers();
     assertLinesMatch(digits.getExpected(), accountNumbers.stream().map(Object::toString).collect(Collectors.toList()));
   }
 
@@ -23,7 +26,7 @@ public class InputFileTest {
              _  _  _  _  _  _  _  _  _\s
             | || || || || || || || || |
             |_||_||_||_||_||_||_||_||_|
-                        
+            
             """, "000000000"),
     One("""
             
