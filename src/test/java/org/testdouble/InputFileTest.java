@@ -62,6 +62,12 @@ public class InputFileTest {
             |_|
             
             """, "6"),
+    Seven("""
+             _
+              |
+              |
+            
+            """, "7"),
     ;
 
     private final String input;
