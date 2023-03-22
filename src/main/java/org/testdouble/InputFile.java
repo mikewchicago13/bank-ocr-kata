@@ -41,7 +41,7 @@ public class InputFile {
     final String secondLine = lines.get(1);
     final String thirdLine = lines.get(2);
 
-    digitRepresentation = IntStream.range(0, 2)
+    digitRepresentation = IntStream.range(0, 9)
             .mapToObj(i -> {
               final char top = getCharAt(firstLine, 1, i);
               final char leftTop = getCharAt(secondLine, 0, i);
