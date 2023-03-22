@@ -50,6 +50,12 @@ public class InputFileTest {
               |
             
             """, "4"),
+    Five("""
+             _
+            |_
+             _|
+            
+            """, "5"),
     ;
 
     private final String input;

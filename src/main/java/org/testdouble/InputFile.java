@@ -3,13 +3,14 @@ package org.testdouble;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 public class InputFile {
   private static final Digit Zero = new Digit('_', '|', ' ', '|', '|', '_', '|');
   private static final Digit One = new Digit(' ', ' ', ' ', '|', ' ', ' ', '|');
   private static final Digit Two = new Digit('_', ' ', '_', '|', '|', '_', ' ');
   private static final Digit Three = new Digit('_', ' ', '_', '|', ' ', '_', '|');
+  private static final Digit Four = new Digit(' ', '|', '_', '|', ' ', ' ', '|');
+  private static final Digit Five = new Digit('_', '|', '_', ' ', ' ', '_', '|');
 
   private static final HashMap<Digit, String> digitStringHashMap;
 
@@ -19,6 +20,8 @@ public class InputFile {
     digitStringHashMap.put(One, "1");
     digitStringHashMap.put(Two, "2");
     digitStringHashMap.put(Three, "3");
+    digitStringHashMap.put(Four, "4");
+    digitStringHashMap.put(Five, "5");
   }
 
   private final String digitRepresentation;
@@ -84,7 +87,7 @@ public class InputFile {
 
     @Override
     public int hashCode() {
-      return Objects.hash(top, leftTop, middle, rightTop, leftBottom, bottom, rightBottom);
+      return toString().hashCode();
     }
   }
 
