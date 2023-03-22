@@ -68,6 +68,12 @@ public class InputFileTest {
               |
             
             """, "7"),
+    Eight("""
+             _
+            |_|
+            |_|
+            
+            """, "8"),
     ;
 
     private final String input;
