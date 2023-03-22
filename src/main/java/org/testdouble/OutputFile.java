@@ -12,6 +12,6 @@ public class OutputFile {
 
   @Override
   public String toString() {
-    return accountNumbers.stream().map(AccountNumber::toString).collect(Collectors.joining(System.lineSeparator())) + System.lineSeparator();
+    return accountNumbers.stream().map(AccountNumber::toString).collect(Collectors.joining(System.lineSeparator()));
   }
 }
