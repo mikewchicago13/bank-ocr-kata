@@ -79,6 +79,12 @@ public class InputFileTest {
              _| _| _| _| _| _| _| _| _|
             
             """, "999999999"),
+    DifferentNumbers("""
+                _  _     _  _  _  _  _\s
+              | _| _||_||_ |_   ||_||_|
+              ||_  _|  | _||_|  ||_| _|
+                        
+            """, "123456789"),
     ;
 
     private final String input;

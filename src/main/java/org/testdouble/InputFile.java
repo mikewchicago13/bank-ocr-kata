@@ -42,16 +42,18 @@ public class InputFile {
     final String thirdLine = lines.get(2);
 
     digitRepresentation = IntStream.range(0, 9)
-            .mapToObj(i -> {
-              final char top = getCharAt(firstLine, 1, i);
-              final char leftTop = getCharAt(secondLine, 0, i);
-              final char middle = getCharAt(secondLine, 1, i);
-              final char rightTop = getCharAt(secondLine, 2, i);
-              final char leftBottom = getCharAt(thirdLine, 0, i);
-              final char bottom = getCharAt(thirdLine, 1, i);
-              final char rightBottom = getCharAt(thirdLine, 2, i);
-              final Digit digit = new Digit(top, leftTop, middle, rightTop, leftBottom, bottom, rightBottom);
-              return digitStringHashMap.getOrDefault(digit, "?");
+            .mapToObj(digit -> {
+              final char top = getCharAt(firstLine, 1, digit);
+
+              final char leftTop = getCharAt(secondLine, 0, digit);
+              final char middle = getCharAt(secondLine, 1, digit);
+              final char rightTop = getCharAt(secondLine, 2, digit);
+
+              final char leftBottom = getCharAt(thirdLine, 0, digit);
+              final char bottom = getCharAt(thirdLine, 1, digit);
+              final char rightBottom = getCharAt(thirdLine, 2, digit);
+
+              return digitStringHashMap.getOrDefault(new Digit(top, leftTop, middle, rightTop, leftBottom, bottom, rightBottom), "?");
             })
             .collect(Collectors.joining());
   }
@@ -65,24 +67,8 @@ public class InputFile {
     return Collections.singletonList(new AccountNumber(digitRepresentation));
   }
 
-  private static class Digit {
-    private final char top;
-    private final char leftTop;
-    private final char middle;
-    private final char rightTop;
-    private final char leftBottom;
-    private final char bottom;
-    private final char rightBottom;
-
-    public Digit(char top, char leftTop, char middle, char rightTop, char leftBottom, char bottom, char rightBottom) {
-      this.top = top;
-      this.leftTop = leftTop;
-      this.middle = middle;
-      this.rightTop = rightTop;
-      this.leftBottom = leftBottom;
-      this.bottom = bottom;
-      this.rightBottom = rightBottom;
-    }
+  private record Digit(char top, char leftTop, char middle, char rightTop, char leftBottom, char bottom,
+                       char rightBottom) {
 
     @Override
     public String toString() {
