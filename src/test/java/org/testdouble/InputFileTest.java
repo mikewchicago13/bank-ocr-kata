@@ -86,12 +86,48 @@ public class InputFileTest {
               ||_  _|  | _||_|  ||_| _|
                         
             """, "123456789"),
-    Illegible("""
+    IllegibleMissing_TopLeftPipeOn5_and_BottomRightPipeOn9("""
                 _  _     _  _  _  _  _\s
               | _| _||_| _ |_   ||_||_|
               ||_  _|  | _||_|  ||_| _\s
                         
             """, "1234?678?"),
+    IllegibleMissing_TopUnderscoreOn0("""
+                _  _  _  _  _  _  _  _\s
+            | || || || || || || || || |
+            |_||_||_||_||_||_||_||_||_|
+            
+            """, "?00000000"),
+    IllegibleMissing_TopRightPipeOn0("""
+             _  _  _  _  _  _  _  _  _\s
+            |  | || || || || || || || |
+            |_||_||_||_||_||_||_||_||_|
+            
+            """, "?00000000"),
+    IllegibleMissing_BottomRightPipeOn0("""
+             _  _  _  _  _  _  _  _  _\s
+            | || || || || || || || || |
+            |_ |_||_||_||_||_||_||_||_|
+            
+            """, "?00000000"),
+    IllegibleMissing_BottomUnderscoreOn0("""
+             _  _  _  _  _  _  _  _  _\s
+            | || || || || || || || || |
+            | ||_||_||_||_||_||_||_||_|
+            
+            """, "?00000000"),
+    IllegibleMissing_BottomLeftPipeOn0("""
+             _  _  _  _  _  _  _  _  _\s
+            | || || || || || || || || |
+             _||_||_||_||_||_||_||_||_|
+            
+            """, "?00000000"),
+    IllegibleMissing_TopLeftPipeOn0("""
+             _  _  _  _  _  _  _  _  _\s
+              || || || || || || || || |
+            |_||_||_||_||_||_||_||_||_|
+            
+            """, "?00000000"),
     MultipleLines("""
                 _  _     _  _  _  _  _\s
               | _| _||_||_ |_   ||_||_|
