@@ -12,14 +12,13 @@ import static org.junit.jupiter.api.Assertions.assertLinesMatch;
 
 public class InputFileTest {
   @ParameterizedTest
-  @EnumSource(SingleDigits.class)
-  public void parse(SingleDigits digits) {
-    final String input = digits.toString();
-    final List<AccountNumber> accountNumbers = new InputFile(Arrays.stream(input.split(System.lineSeparator())).toList()).parse();
+  @EnumSource(Samples.class)
+  public void parse(Samples digits) {
+    final List<AccountNumber> accountNumbers = new InputFile(Arrays.stream(digits.getInput().split(System.lineSeparator())).toList()).parse();
     assertLinesMatch(Collections.singletonList(digits.getExpected()), accountNumbers.stream().map(Object::toString).collect(Collectors.toList()));
   }
 
-  private enum SingleDigits{
+  private enum Samples {
     Zero("""
              _
             | |
@@ -85,7 +84,7 @@ public class InputFileTest {
     private final String input;
     private final String expected;
 
-    SingleDigits(String input, String expected) {
+    Samples(String input, String expected) {
 
       this.input = input;
       this.expected = expected;
@@ -97,6 +96,10 @@ public class InputFileTest {
 
     @Override
     public String toString() {
+      return this.name();
+    }
+
+    public String getInput() {
       return input;
     }
   }
