@@ -38,6 +38,12 @@ public class InputFileTest {
             |_
             
             """, "2"),
+    Three("""
+             _
+             _|
+             _|
+            
+            """, "3"),
     ;
 
     private final String input;
