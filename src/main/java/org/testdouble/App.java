@@ -10,11 +10,10 @@ public class App {
     final String fileName = args[0];
     final List<String> lines = Files.readAllLines(Paths.get(fileName));
     final List<String> accountNumbers = new InputFile(lines).toAccountNumbers();
-    final OutputFile outputFile = new OutputFile(accountNumbers.stream()
+    final OutputFormatting<AccountNumber> outputFormatting = new OutputFormatting<>(accountNumbers.stream()
             .map(AccountNumber::new)
-            .map(AccountNumber::toString)
             .collect(Collectors.toList()));
 
-    System.out.println(outputFile);
+    System.out.println(outputFormatting);
   }
 }

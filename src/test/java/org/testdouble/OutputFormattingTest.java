@@ -6,10 +6,10 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class OutputFileTest {
+public class OutputFormattingTest {
   @Test
   public void toStringIsSimpleLineConcatenation() {
-    final String actual = new OutputFile(Arrays.asList("1", "2")).toString();
+    final String actual = new OutputFormatting(Arrays.asList("1", "2")).toString();
     assertEquals("1" + System.lineSeparator() + "2", actual);
   }
 }
