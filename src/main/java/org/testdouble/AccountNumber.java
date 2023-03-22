@@ -10,28 +10,37 @@ public class AccountNumber {
     this.toString = toString;
   }
 
-  private int toDigit(int index) {
-    return toString.charAt(index) - ASCII_ZERO;
-  }
-
   @Override
   public String toString() {
-    final int length = toString.length();
-    final boolean isIllegible = IntStream.range(0, length)
-            .anyMatch(x -> Constants.ILLEGIBLE_CHARACTER == toString.charAt(x));
-    if (isIllegible) {
+    if (isIllegible()) {
       return toString + " ILL";
     }
+
+    if (isValid()) {
+      return toString;
+    }
+    return toString + " ERR";
+  }
+
+  private boolean isIllegible() {
+    final int length = toString.length();
+
+    return IntStream.range(0, length)
+            .anyMatch(x -> Constants.ILLEGIBLE_CHARACTER == toString.charAt(x));
+  }
+
+  private boolean isValid() {
+    final int length = toString.length();
 
     final int checksum = IntStream.range(0, length)
             .map(index -> (length - index) * toDigit(index))
             .reduce(Integer::sum)
             .orElse(-1) % 11;
-    final boolean isValid = checksum == 0;
 
-    if (isValid) {
-      return toString;
-    }
-    return toString + " ERR";
+    return checksum == 0;
+  }
+
+  private int toDigit(int index) {
+    return toString.charAt(index) - ASCII_ZERO;
   }
 }
