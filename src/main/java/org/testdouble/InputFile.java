@@ -63,7 +63,9 @@ public class InputFile {
               final char bottom = getCharAt(thirdLine, 1, digit);
               final char rightBottom = getCharAt(thirdLine, 2, digit);
 
-              return digitStringHashMap.getOrDefault(new Digit(top, leftTop, middle, rightTop, leftBottom, bottom, rightBottom), "?");
+              return digitStringHashMap.getOrDefault(
+                      new Digit(top, leftTop, middle, rightTop, leftBottom, bottom, rightBottom),
+                      Constants.ILLEGIBLE_CHARACTER + "");
             })
             .collect(Collectors.joining());
   }
