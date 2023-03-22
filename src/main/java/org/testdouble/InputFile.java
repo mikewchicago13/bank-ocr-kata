@@ -52,22 +52,24 @@ public class InputFile {
     final String secondLine = lines.get(i + 1);
     final String thirdLine = lines.get(i + 2);
     return IntStream.range(0, 9)
-            .mapToObj(digit -> {
-              final char top = getCharAt(firstLine, 1, digit);
-
-              final char leftTop = getCharAt(secondLine, 0, digit);
-              final char middle = getCharAt(secondLine, 1, digit);
-              final char rightTop = getCharAt(secondLine, 2, digit);
-
-              final char leftBottom = getCharAt(thirdLine, 0, digit);
-              final char bottom = getCharAt(thirdLine, 1, digit);
-              final char rightBottom = getCharAt(thirdLine, 2, digit);
-
-              return digitStringHashMap.getOrDefault(
-                      new Digit(top, leftTop, middle, rightTop, leftBottom, bottom, rightBottom),
-                      Constants.ILLEGIBLE_CHARACTER + "");
-            })
+            .mapToObj(digit -> singleDigit(firstLine, secondLine, thirdLine, digit))
             .collect(Collectors.joining());
+  }
+
+  private String singleDigit(String firstLine, String secondLine, String thirdLine, int digit) {
+    final char top = getCharAt(firstLine, 1, digit);
+
+    final char leftTop = getCharAt(secondLine, 0, digit);
+    final char middle = getCharAt(secondLine, 1, digit);
+    final char rightTop = getCharAt(secondLine, 2, digit);
+
+    final char leftBottom = getCharAt(thirdLine, 0, digit);
+    final char bottom = getCharAt(thirdLine, 1, digit);
+    final char rightBottom = getCharAt(thirdLine, 2, digit);
+
+    return digitStringHashMap.getOrDefault(
+            new Digit(top, leftTop, middle, rightTop, leftBottom, bottom, rightBottom),
+            Constants.ILLEGIBLE_CHARACTER + "");
   }
 
   private char getCharAt(String firstLine, int index, int character) {
