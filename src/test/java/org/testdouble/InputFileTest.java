@@ -56,6 +56,12 @@ public class InputFileTest {
              _|
             
             """, "5"),
+    Six("""
+             _
+            |_
+            |_|
+            
+            """, "6"),
     ;
 
     private final String input;

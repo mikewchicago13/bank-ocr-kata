@@ -11,6 +11,7 @@ public class InputFile {
   private static final Digit Three = new Digit('_', ' ', '_', '|', ' ', '_', '|');
   private static final Digit Four = new Digit(' ', '|', '_', '|', ' ', ' ', '|');
   private static final Digit Five = new Digit('_', '|', '_', ' ', ' ', '_', '|');
+  private static final Digit Six = new Digit('_', '|', '_', ' ', '|', '_', '|');
 
   private static final HashMap<Digit, String> digitStringHashMap;
 
@@ -22,6 +23,7 @@ public class InputFile {
     digitStringHashMap.put(Three, "3");
     digitStringHashMap.put(Four, "4");
     digitStringHashMap.put(Five, "5");
+    digitStringHashMap.put(Six, "6");
   }
 
   private final String digitRepresentation;
