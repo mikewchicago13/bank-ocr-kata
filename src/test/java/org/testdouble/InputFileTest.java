@@ -6,7 +6,6 @@ import org.junit.jupiter.params.provider.EnumSource;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertLinesMatch;
 
@@ -17,8 +16,7 @@ public class InputFileTest {
     final String input = digits.getInput();
     final String[] split = input.split(System.lineSeparator());
     final List<String> lines = Arrays.stream(split).toList();
-    final List<AccountNumber> accountNumbers = new InputFile(lines).toAccountNumbers();
-    assertLinesMatch(digits.getExpected(), accountNumbers.stream().map(Object::toString).map(x -> x.substring(0, 9)).collect(Collectors.toList()));
+    assertLinesMatch(digits.getExpected(), new InputFile(lines).toAccountNumbers());
   }
 
   private enum Samples {

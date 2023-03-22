@@ -40,10 +40,9 @@ public class InputFile {
     this.lines = lines;
   }
 
-  public List<AccountNumber> toAccountNumbers() {
+  public List<String> toAccountNumbers() {
     return IntStream.range(0, (lines.size() + 1) / LINES_PER_ACCOUNT_NUMBER)
             .mapToObj(this::toSingleAccountNumber)
-            .map(AccountNumber::new)
             .collect(Collectors.toList());
   }
 
